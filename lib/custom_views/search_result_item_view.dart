@@ -22,10 +22,7 @@ class _SearchResultItemViewState extends State<SearchResultItemView> {
               child: Card(
                 semanticContainer: true,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                child: Image.network(
-                  'https://www.bssnews.net/assets/news_photos/2022/06/20/image-67540-1655722222.jpg',
-                  fit: BoxFit.fill,
-                ),
+                child: Image(image: AssetImage("lib/assets/images/item_demo_image.jpeg"), fit: BoxFit.fill,),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
