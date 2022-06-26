@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location_tracking_app/custom_views/search_location_item_view.dart';
 import 'package:location_tracking_app/custom_views/search_result_item_view.dart';
+import 'package:flutter/services.dart';
 
 class HomeActivity extends StatefulWidget {
   const HomeActivity({Key? key}) : super(key: key);
@@ -12,7 +13,19 @@ class HomeActivity extends StatefulWidget {
 
 class _HomeActivityState extends State<HomeActivity> {
 
+  static const platform = const MethodChannel("com.example.location_tracking_app");
   TextEditingController locationSearchController = TextEditingController();
+  String? value = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      printFromKotlin();
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,5 +143,15 @@ class _HomeActivityState extends State<HomeActivity> {
         itemBuilder: (context, index) {
           return SearchResultItemView();
         });
+  }
+
+  void printFromKotlin() async {
+
+    try{
+      value = await platform.invokeMethod("from_kotlin");
+    }catch(e){
+      print(e);
+    }
+    print(value);
   }
 }
